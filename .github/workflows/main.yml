@@ -25,5 +25,4 @@ jobs:
 
       - name: Run script
         run: |
-          # 請確保這裡的檔名與您上傳的 Python 程式名稱一致
-          python screener.py
+          python screener.py  # 這裡改成您的正確檔名
