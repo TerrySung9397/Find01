@@ -1,0 +1,29 @@
+name: Python Scheduled Task
+
+on:
+  schedule:
+    # 每週一至週五的台灣時間 11:00 及 14:00 執行
+    - cron: '0 3,6 * * 1-5'
+  workflow_dispatch: # 方便您隨時手動點擊測試
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Install dependencies
+        run: |
+          # 確保您的 Repository 根目錄有 requirements.txt
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+      - name: Run script
+        run: |
+          # 請確保這裡的檔名與您上傳的 Python 程式名稱一致
+          python screener.py
