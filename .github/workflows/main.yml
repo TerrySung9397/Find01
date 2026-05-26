@@ -1,0 +1,26 @@
+name: Python Scheduled Task
+
+on:
+  schedule:
+    - cron: '0 3,6 * * 1-5'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4  # 更新為 v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5 # 更新為 v5
+        with:
+          python-version: '3.9'
+
+      - name: Install dependencies
+        run: |
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+      - name: Run script
+        run: |
+          python screener.py -i 半導體,電腦週邊,光電,通訊網路,電子零組件,電子通路,資訊服務,其他電子 --tg
