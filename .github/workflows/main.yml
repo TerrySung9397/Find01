@@ -2,7 +2,9 @@ name: Python Scheduled Task
 
 on:
   schedule:
-    - cron: '0 3,6 * * 1-5'
+    # 每天的 00, 02, 04, 06 (UTC) 分別對應台灣的 08, 10, 12, 14 點
+    # 這裡設定為週一至週五 (1-5)
+    - cron: '0 0,2,4,6 * * 1-5'
   workflow_dispatch:
 
 jobs:
@@ -24,3 +26,7 @@ jobs:
       - name: Run script
         run: |
           python screener.py -i 半導體,電腦週邊,光電,通訊網路,電子零組件,電子通路,資訊服務,其他電子 --tg
+      
+      # 喚醒排程任務
+
+      
